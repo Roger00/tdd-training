@@ -40,4 +40,10 @@ class BudgetServiceTest {
         assertEquals(3000, budgetService.totalAmount(LocalDate.of(2024,8,31), LocalDate.of(2024,9,1)));
     }
 
+    @Test
+    void testCross3Months(){
+        givenBudgets(asList(new Budget("202408", 31000),new Budget("202409", 60000),new Budget("202410", 93000)));
+        assertEquals(64000, budgetService.totalAmount(LocalDate.of(2024,8,31), LocalDate.of(2024,10,1)));
+    }
+
 }

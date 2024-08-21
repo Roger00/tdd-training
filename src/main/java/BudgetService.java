@@ -19,6 +19,11 @@ public class BudgetService {
         return false;
     }
 
+    private Integer getMidMonthBudget(LocalDate start, LocalDate end){
+
+        // start +1 ~ end -1
+    }
+
     public int totalAmount(LocalDate start, LocalDate end) {
         if(end.isBefore(start)) {
             return 0;
@@ -28,11 +33,13 @@ public class BudgetService {
             Integer startMonthBudget = getMonthBudget(start);
             Integer startBudget = (startMonthPeriod.getDays()+1) * (startMonthBudget/start.lengthOfMonth());
 
+            Integer midBudget = getMidMonthBudget(start, end);
+
             Period endMonthPeriod = Period.between(end.withDayOfMonth(1), end);
             Integer endMonthBudget = getMonthBudget(end);
             Integer endBudget = (endMonthPeriod.getDays()+1) * (endMonthBudget/end.lengthOfMonth());
 
-            return startBudget+endBudget;
+            return startBudget+midBudget+endBudget;
 
         }
 
